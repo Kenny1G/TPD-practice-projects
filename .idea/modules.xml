@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BurgerByte/BurgerByte.iml" filepath="$PROJECT_DIR$/BurgerByte/BurgerByte.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TopSecretTracker/TopSecretTracker.iml" filepath="$PROJECT_DIR$/TopSecretTracker/TopSecretTracker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VegetableGarden/VegetableGarden.iml" filepath="$PROJECT_DIR$/VegetableGarden/VegetableGarden.iml" />
       <module fileurl="file://$PROJECT_DIR$/ZooManager/ZooManager.iml" filepath="$PROJECT_DIR$/ZooManager/ZooManager.iml" />
     </modules>
   </component>

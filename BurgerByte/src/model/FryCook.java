@@ -1,37 +1,22 @@
 package model;
 
-public class FryCook {
+public class FryCook extends Employee {
+    public static final double FRYCOOK_WAGE = 6.50;
 
-    public static final double FRYCOOK_WAGE = 5.50;
-    public static final double BASE_WAGE = 10.00;
-
-    private String name;
-    private int age;
-    private double hoursWorked;
-    private boolean atWork;
     private BurgerByte workBranch;
     private boolean isGrillReady;
 
     public FryCook(String name, int age, BurgerByte workBranch) {
-        this.name = name;
-        this.age = age;
+        super(name, age);
         this.workBranch = workBranch;
         isGrillReady = false;
-        workBranch.addFryCook(this);
+        workBranch.addStaff(this);
+        OTHER_WAGE = FRYCOOK_WAGE;
     }
 
-    // getters
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public boolean isAtWork() { return atWork; }
     public BurgerByte getWorkPlace() { return workBranch; }
     public boolean isGrillReady() { return isGrillReady; }
 
-    // MODIFIES: this
-    // EFFECTS: adds hours to the hoursWorked field
-    private void logHoursWorked(double hours) {
-        hoursWorked += hours;
-    }
 
     // EFFECTS: the grill should be ready to go, hours should be logged, and
     //          the atWork field should be updated to reflect this FryCook's status
@@ -48,11 +33,5 @@ public class FryCook {
         atWork = false;
         System.out.println("Grill is closed for the day.");
     }
-
-    // EFFECTS: computes wages for the day
-    public double computeWage() {
-        return (hoursWorked * (FRYCOOK_WAGE + BASE_WAGE));
-    }
-
 
 }

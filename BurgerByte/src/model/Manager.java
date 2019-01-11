@@ -3,42 +3,21 @@ package model;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Manager {
+public class Manager extends Employee {
 
     public static final double MANAGER_WAGE = 9.50;
-    public static final double BASE_WAGE = 10.00;
 
-    private String name;
-    private int age;
-    private double hoursWorked;
-    private boolean atWork;
     private BurgerByte managingBranch;
-    private List<Cashier> cashiers;
-    private List<FryCook> fryCooks;
 
     public Manager(String name, int age) {
-        this.name = name;
-        this.age = age;
-        hoursWorked = 0;
-        atWork = false;
-        cashiers = new LinkedList<>();
-        fryCooks = new LinkedList<>();
+        super(name, age);
+        OTHER_WAGE = MANAGER_WAGE;
     }
 
-    // getters
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public boolean isAtWork() { return atWork; }
-    public double getHoursWorked() { return hoursWorked; }
+    // Getters
     public BurgerByte getManagingBranch() { return managingBranch; }
-    public List<Cashier> getCashiers() { return cashiers; }
-    public List<FryCook> getFryCooks() { return fryCooks; }
+    public List<Employee> getTeam() { return managingBranch.getStaff(); }
 
-    // MODIFIES: this
-    // EFFECTS: adds hours to the hoursWorked field
-    private void logHoursWorked(double hours) {
-        hoursWorked += hours;
-    }
 
     // REQUIRES: hours >= 0
     // MODIFIES: this
@@ -54,14 +33,11 @@ public class Manager {
     // MODIFIES: this
     // EFFECTS: closes this Manager's BurgerByte, set atWork to false
     public void leaveWork() {
-        managingBranch.closeRestaurant();
         atWork = false;
+        if (managingBranch.isOpen()){
+            managingBranch.closeRestaurant();
+        }
         System.out.println("We are closed for the day!");
-    }
-
-    // EFFECTS: returns the total amount of wages this Manager made
-    public double computeWage() {
-        return (hoursWorked * (MANAGER_WAGE + BASE_WAGE));
     }
 
     // EFFECTS: set this managingBranch to managingBranch
@@ -72,38 +48,20 @@ public class Manager {
     // REQUIRES: c must not be in already in team and this Manager's restaurant
     // MODIFIES: this
     // EFFECTS: adds given c to team and this Manager's restaurant
-    public void hire(Cashier c) {
-        managingBranch.addCashier(c);
-        cashiers.add(c);
-        System.out.println("Welcome aboard, " + c.getName() + "!");
+    public void hire(Employee e) {
+        managingBranch.addStaff(e);
+        System.out.println("Welcome aboard, " + e.getName() + "!");
     }
 
-    // REQUIRES: fc must not be in already in team and this Manager's restaurant
-    // MODIFIES: this
-    // EFFECTS: adds given fc to team and this Manager's restaurant
-    public void hire(FryCook fc) {
-        managingBranch.addFryCook(fc);
-        fryCooks.add(fc);
-        System.out.println("Welcome aboard, " + fc.getName() + "!");
-    }
 
     // REQUIRES: c must be in this team and and this Manager's restaurant
     // MODIFIES: this
     // EFFECTS: removes given Cashier from team and this Manager's restaurant
-    public void fire(Cashier c) {
-        managingBranch.removeCashier(c);
-        cashiers.remove(c);
-        System.out.println("Sorry to let you go, " + c.getName() + ".");
+    public void fire(Employee e) {
+        managingBranch.removeStaff(e);
+        System.out.println("Sorry to let you go, " + e.getName() + ".");
     }
 
-    // REQUIRES: fc must be in this team and and this Manager's restaurant
-    // MODIFIES: this
-    // EFFECTS: removes given fc from team and this Manager's restaurant
-    public void fire(FryCook fc) {
-        managingBranch.removeFrycook(fc);
-        fryCooks.remove(fc);
-        System.out.println("Sorry to let you go, " + fc.getName() + ".");
-    }
 
 
 }

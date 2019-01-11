@@ -1,4 +1,7 @@
-package model;
+package model.Veggies;
+
+import model.VegType;
+import model.Vegetable;
 
 public class Beets extends Vegetable {
 
